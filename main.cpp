@@ -63,12 +63,13 @@ int main(int argc, char *argv[]) {
 
   // processOptionsInLine(argc, argv);
   strcpy(fileName,"La.wav");
-  long int echSec = 10000;
+  long int ech = 10000;
+  long int echSec = ech*2;
   unsigned char data[echSec];
   
   double teta = 0;
-  double dteta = 2 * PI/(echSec/440);
-
+  double dteta = 2 * PI * 440 / ech;
+	
   for(int i = 0 ; i < echSec ; i++)
     {
       data[i] = (unsigned char)((sin(teta)+1)*127.0);
@@ -76,22 +77,17 @@ int main(int argc, char *argv[]) {
 	  if(teta >= 2*PI)
 		teta = 0;
     }
-	for(int i = 0; i < 10; i++)
-	{
-		cout << (double)((int)data[i]) << endl;
-	}
+	
   double data_reel[echSec];
   double data_imaginaire[echSec];
+  
   cout << "Début DTF" << endl;
-  DFT(data,data_reel,data_imaginaire,echSec);
+	DFT(data,data_reel,data_imaginaire,echSec);
   cout << "Fin DTF et Début IDTF" << endl;
-  IDFT(data,data_reel,data_imaginaire,echSec);
+	//IDFT(data,data_reel,data_imaginaire,echSec);
   cout << "Fin IDTF" << endl;
-  	for(int i = 0; i < 10; i++)
-	{
-		cout << (double)((int)data[i]) << endl;
-	}
-   Wave * w = new Wave(data,echSec,(short)1,echSec);
+
+   Wave * w = new Wave(data,echSec,(short)1,ech);
    w->write(fileName);
   //delete data;
    delete w;

@@ -4,7 +4,7 @@
 class Wave {
 
 
-private :
+public :
   //chunk type
   char file_type[4];         // (4 octets) : Constante "RIFF" i.e identification du format
   int file_size;             // (4 octets) : file_size est le nombre d'octet restant à lire (i.e = taille du fichier moins 8 octets)
@@ -38,8 +38,7 @@ private :
 public:
        
   //Méthode permettant de récupérer les données (cad le signal sur 8 bits)     
-  void getData8(unsigned char** data, // pointeur sur le tableau de donées lorsque l'on est sur des données 8 bits
-                int* size);           // pointeur sur la taille du tableau 
+  void getData8(unsigned char** data, int* size);
   //Méthode permettant de modifier les données
   void modifData8(unsigned char* data); // Tableau de donées lorsque l'on est sur des données 8 bits
 
